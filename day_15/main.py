@@ -301,6 +301,8 @@ def order_drink():
     if money < total_price:
         update_money_bank(-money)
         print(f"Maaf uang Anda tidak cukup. Silahkan ambil uang Anda {money_format(money)}")
+        input("Enter untuk kembali ")
+        return
 
     clear()
     create_drink(drink, topping)
