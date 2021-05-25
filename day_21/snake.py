@@ -25,12 +25,15 @@ STARTED_COORDINATE = [(0, 0), (-20, 0), (-40, 0)]
 class Snake:
     def __init__(self, color=DEFAULT_COLOR, shape=DEFAULT_SHAPE):
         self.parts = []
+        self.color = color
+        self.shape = shape
         for coordinate in STARTED_COORDINATE:
-            part = create_part(color, shape)
+            part = create_part(self.color, self.shape)
             part.goto(coordinate)
             self.parts.append(part)
 
         self.head = self.parts[0]
+        self.tail = self.parts[-1]
 
     def move(self):
         for i in range(len(self.parts)-1, 0, -1):
@@ -38,6 +41,17 @@ class Snake:
             self.parts[i].goto(next_part.xcor(), next_part.ycor())
 
         self.head.forward(SNAKE_MOVEMENT)
+
+    def extend(self):
+        part = create_part(self.color, self.shape)
+        self.parts.append(part)
+        part.goto(self.tail.position())
+
+    def is_head_collide_with_body(self):
+        for part in self.parts[1:]:
+            if self.head.distance(part.position()) < 15:
+                return True
+        return False
 
     def up(self):
         if self.head.heading() != DIRECTION_DOWN:
