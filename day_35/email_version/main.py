@@ -1,6 +1,5 @@
 # Get hourly weather prediction for next 12 hours
-# Weather check will start run at 7AM
-# Will check if there is chance to rain from 7AM - 7PM
+# If there is chance to rain, send email
 
 import requests
 import smtplib
@@ -8,10 +7,13 @@ import datetime
 from dateutil import tz
 import os
 
+# OWM_KEY='xxx' EMAIL_FROM='xxx' EMAIL_TO='xxx' EMAIL_PWD='' python3 main.py
+
 WEATHER_HOST = "https://api.openweathermap.org/data/2.5/onecall"
 OWM_KEY = os.environ.get("OWM_KEY")
 
-EMAIL = ""
+EMAIL_FROM = os.environ.get("EMAIL_FROM")
+EMAIL_TO = os.environ.get("EMAIL_TO")
 EMAIL_PASSWORD = os.environ.get("EMAIL_PWD")
 
 weather_param = {
@@ -51,14 +53,9 @@ for prediction in seven_hours_prediction:
         rain_schedule.append(f"{local_time.strftime('%Y-%m-%d %H:%M:%S')} - {weather['main']} - {weather['description']}")
 
 if today_is_raining:
-
-    # send notification using SMS via Twilio
-    # unfortunately my phone number could not receiver Twilio's confirmation SMS somehow :(
-    # so lets send notification with email instead.
-
     email_connection = smtplib.SMTP("smtp.gmail.com")
     email_connection.starttls()
-    email_connection.login(user=EMAIL, password=EMAIL_PASSWORD)
+    email_connection.login(user=EMAIL_FROM, password=EMAIL_PASSWORD)
 
     rain_schedules = '\n'.join(rain_schedule)
 
@@ -70,8 +67,8 @@ Don't forget to bring umbrella!
     """
 
     email_connection.sendmail(
-        from_addr=EMAIL,
-        to_addrs=EMAIL,
+        from_addr=EMAIL_FROM,
+        to_addrs=EMAIL_TO,
         msg=f"Subject:TODAY IS GOING TO RAIN!\n\n{message_body}")
 
     email_connection.close()
