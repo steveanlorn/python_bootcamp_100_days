@@ -45,13 +45,13 @@ response = requests.get(WEATHER_HOST, params=weather_param)
 response.raise_for_status()
 response_body = response.json()
 
-seven_hours_prediction = response_body["hourly"][:12]
+hours_prediction = response_body["hourly"][:12]
 
 today_is_raining = False
 
 rain_schedule = []
 
-for prediction in seven_hours_prediction:
+for prediction in hours_prediction:
     # main weather condition
     weather = prediction["weather"][0]
 
