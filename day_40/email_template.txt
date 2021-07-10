@@ -1,0 +1,5 @@
+Hi [first_name],
+
+Berikut ini adalah tiket penerbangan yang mungkin menarik buat kamu!
+
+[tickets]
