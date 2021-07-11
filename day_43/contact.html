@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Me</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="https://yt3.ggpht.com/wonL7fQxgHrTflncewaQySGBom-7SbfmmHbPu_goxgL5VceEdmTIL1g-4eyDmXwEMdenZ-KYng=s88-c-k-c0x00ffffff-no-rj" alt="Steve learning note logo"/>
+        </a>
+        <h1>Contact Steve Anlorn</h1>
+        <p>Email: steve@cool.com</p>
+        <p>Phone: <a href="tel:+62812080182081">0812080182081</a></p>
+    </header>
+    <hr>
+    <section>
+        <form action="mailto:steve@cool.com?subject=Contact%20Steve%20Anlorn" method="POST">
+            <div>
+                <label for="name">Your name</label>
+                <input type="text" name="name" id="name" autofocus required>
+            </div>
+            <br>
+            <div>
+                <label for="email">Your email</label>
+                <input type="email" name="email" id="email" required placeholder="your@email.com">
+            </div>
+            <br>
+            <div>
+                <label for="message">Your message</label><br>
+                <textarea name="message" id="message" cols="50" rows="20" required minlength="10" maxlength="500"></textarea>
+            </div>
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </section>
+    <footer>
+        <a href="contact.html">Contact me</a>
+    </footer>
+</body>
+</html>
